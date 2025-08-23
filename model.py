@@ -22,6 +22,7 @@ class RegressionModel():
                                            verbose=True)
     
     def split_train_predict(self, test_size: float):
+        """Performs train/test/split on data and fits model"""
 
         X_train, X_test, y_train, y_test = train_test_split(self.X, self.y, test_size=test_size, random_state=42)
 
@@ -33,6 +34,7 @@ class RegressionModel():
     
     @staticmethod
     def get_accuracy(y_test, y_pred):
+        """Obatains R-squared and Meam squared error, along with residual plot"""
 
         print(f'### Test Accuracy ###: {r2_score(y_test, y_pred)}, ### MSE ###: {mean_squared_error(y_test, y_pred)}')
 
@@ -45,6 +47,7 @@ class RegressionModel():
 
 
     def cross_val(self, n_splits: int):
+        """Performs K-fold cross validation on model and displays results"""
 
         kf = KFold(n_splits=n_splits, shuffle=True)
         scoring=('r2', 'neg_mean_squared_error')
@@ -59,7 +62,7 @@ class RegressionModel():
     
     
     def tune_hyperparameters(self, hypermarameters: dict, X_train, y_train):
-        
+        """Gets the best hyperparameter after Grid Search CV"""
         grid_search = GridSearchCV(self.model, 
                         param_grid=hypermarameters, cv=7, n_jobs=-1)  
         grid_search.fit(X_train, y_train) 
