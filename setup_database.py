@@ -12,6 +12,7 @@ class MySQLConnector():
         self.password = password
 
     def connect_to_db(self):
+        """Connect user to the database"""
         self.mydb = mysql.connector.connect(
         host= self.host,
         user= self.user,
@@ -22,6 +23,7 @@ class MySQLConnector():
         
         
     def disconnect_from_db(self):
+        """Disconnect from database"""
         self.mydb.cursor().close()
         self.mydb.close()
         del self.mydb
@@ -29,10 +31,11 @@ class MySQLConnector():
       
         
     def create_nba_db(self):
+        """Create nba database"""
         self.mydb.cursor().execute("CREATE DATABASE IF NOT EXISTS NBA_DB")
         
     def create_stats_table(self):
-        
+      """Create table for player statistics"""  
       self.mydb.cursor().execute("USE NBA_DB")
       self.mydb.cursor().execute("""
                       CREATE TABLE IF NOT EXISTS PER_GAME_STATS (
@@ -72,7 +75,7 @@ class MySQLConnector():
 
     
     def load_data(self, file_path: str, table_name: str):
-
+      """Load data to specified table"""
       self.mydb.cursor().execute("USE NBA_DB")
       self.mydb.cursor().execute(f"""LOAD DATA INFILE '{file_path}'
                       INTO TABLE {table_name}
@@ -84,7 +87,7 @@ class MySQLConnector():
 
 
     def create_income_table(self):
-        
+        """Create income table"""
         self.mydb.cursor().execute("USE NBA_DB")
         self.mydb.cursor().execute("""CREATE TABLE IF NOT EXISTS PER_SEASON_INCOME (
                                    player_id INT NOT NULL,
@@ -96,6 +99,7 @@ class MySQLConnector():
 
 
     def create_players_table(self):
+      """Create players table"""
       self.mydb.cursor().execute("USE NBA_DB")
       self.mydb.cursor().execute("""CREATE TABLE IF NOT EXISTS PLAYERS_TABLE (
                                  player_id INT NOT NULL,
@@ -106,7 +110,7 @@ class MySQLConnector():
        
 
     def clear_table(self, database: str, table: str):
-        
+        """Clear specified table"""
         self.mydb.cursor().execute(f"USE {database}")
         self.mydb.cursor().execute(f"""TRUNCATE TABLE {table}""")
 

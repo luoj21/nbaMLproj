@@ -67,6 +67,6 @@ class RegressionModel():
                         param_grid=hypermarameters, cv=7, n_jobs=-1)  
         grid_search.fit(X_train, y_train) 
         
-        print(grid_search.best_estimator_)
+        print(f'The best parameter is {grid_search.best_estimator_}')
         return grid_search.best_estimator_
         
