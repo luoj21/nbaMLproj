@@ -5,8 +5,9 @@ import time
 import collections
 from bs4 import BeautifulSoup
 from io import StringIO
+from deprecated import deprecated 
 
-@deprecated
+
 def request_stats_data(season1: int, season2: int):
     """Obtains HTML from NBA Reference for the seasons specified.
     The seasons are denoted by the year that they end. So '2024' corresponds to the 2023-2024 season"""
@@ -23,7 +24,7 @@ def request_stats_data(season1: int, season2: int):
             f.write(data.text)
 
 
-@deprecated
+@deprecated(reason = "Hoopshype changed URL")
 def request_income_data(season1: int, season2: int):
     """Obtains HTML from HoopsHype for the seasons specified.
     The seasons are denoted by the year that they end. So '2024' corresponds to the 2023-2024 season"""
@@ -61,7 +62,7 @@ def export_stats_data(season: int):
                           index = False, na_rep=np.nan)
     
 
-
+@deprecated(reason = "Hoops Hype changed URL")
 def export_salary_data(season: int):
     """Exports a CSV for a particular season that contains annual income 
     for each player that played"""

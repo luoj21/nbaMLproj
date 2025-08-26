@@ -135,3 +135,19 @@ t2: Stats
 t3: Player Names
 player_id (PK), player
 """
+
+
+if __name__ == "__main__":
+  
+  data_path = '/Users/jasonluo/Documents/nbaProj/data'
+  mysql_connector = MySQLConnector(host="***", user="***", password="***")
+  mysql_connector.connect_to_db()
+  mysql_connector.create_nba_db()
+  mysql_connector.create_players_table()
+  mysql_connector.create_income_table()
+  mysql_connector.create_stats_table()
+
+  # Uploading data to database
+  mysql_connector.load_data(f'{data_path}/transformed_data/all_players_data.csv', 'PLAYERS_TABLE')
+  mysql_connector.load_data(f'{data_path}/transformed_data/all_season_income.csv', 'PER_SEASON_INCOME')
+  mysql_connector.load_data(f'{data_path}/transformed_data/all_player_stats.csv', 'PER_GAME_STATS')
