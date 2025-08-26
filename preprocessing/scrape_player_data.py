@@ -6,7 +6,7 @@ import collections
 from bs4 import BeautifulSoup
 from io import StringIO
 
-
+@deprecated
 def request_stats_data(season1: int, season2: int):
     """Obtains HTML from NBA Reference for the seasons specified.
     The seasons are denoted by the year that they end. So '2024' corresponds to the 2023-2024 season"""
@@ -19,11 +19,11 @@ def request_stats_data(season1: int, season2: int):
 
         assert data.status_code < 400
         
-        with open(f"data/stats_html/{year}.html", "w+") as f:
+        with open(f"/Users/jasonluo/Documents/nbaProj/data/stats_html/{year}.html", "w+") as f:
             f.write(data.text)
 
 
-
+@deprecated
 def request_income_data(season1: int, season2: int):
     """Obtains HTML from HoopsHype for the seasons specified.
     The seasons are denoted by the year that they end. So '2024' corresponds to the 2023-2024 season"""
@@ -35,7 +35,7 @@ def request_income_data(season1: int, season2: int):
 
         assert data.status_code < 400
         
-        with open(f"data/income_html/{year}.html", "w+") as f:
+        with open(f"/Users/jasonluo/Documents/nbaProj/data/income_html/{year}.html", "w+") as f:
             f.write(data.text)
 
 
@@ -44,7 +44,7 @@ def request_income_data(season1: int, season2: int):
 def export_stats_data(season: int):
     """Exports a CSV for a particular season that contains per game stats
     for each player"""
-    with open(f'data/stats_html/{season}.html') as f:
+    with open(f'/Users/jasonluo/Documents/nbaProj/data/stats_html/{season}.html') as f:
         page = f.read()
 
     soup = BeautifulSoup(page, 'html.parser')
@@ -58,14 +58,14 @@ def export_stats_data(season: int):
                           #index = False, na_rep=r'\N')
     
     season_data_df.to_csv(f"/Users/jasonluo/Documents/nbaProj/data/per_game_stats_data/{season}_player_data.csv", 
-                          index = False, na_rep=np.NaN)
+                          index = False, na_rep=np.nan)
     
 
 
 def export_salary_data(season: int):
     """Exports a CSV for a particular season that contains annual income 
     for each player that played"""
-    with open(f'data/income_html/{season}.html') as f:
+    with open(f'/Users/jasonluo/Documents/nbaProj/data/income_html/{season}.html') as f:
         page = f.read()
 
     soup = BeautifulSoup(page, 'html.parser')
@@ -85,7 +85,7 @@ def export_salary_data(season: int):
 
 
     incomes_df.to_csv(f"/Users/jasonluo/Documents/nbaProj/data/player_season_income/{season}_income_data.csv", 
-                          index = False, na_rep=np.NaN)
+                          index = False, na_rep=np.nan)
 
 
 def check_player_duplicates(df: pd.DataFrame):
