@@ -2,7 +2,6 @@ import mysql
 import mysql.connector
 
 
-
 class MySQLConnector():
     """Connects user to MySQL database"""
     
