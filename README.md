@@ -10,6 +10,6 @@ To get started:
 - ```git clone https://github.com/luoj21/nbaMLproj.git```
 - Create a virtual environment: ```python3 -m venv .venv``` and then ```source .venv/bin/activate```
 - Install dependencies: ```pip install -r requirements.txt```
-- Run the notebook ```model_results.ipynb```
+- Run ```train_eval.py```
 
 -----
